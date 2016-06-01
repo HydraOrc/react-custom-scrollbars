@@ -62,6 +62,7 @@ export default createClass({
         universal: PropTypes.bool,
         style: PropTypes.object,
         children: PropTypes.node,
+        allowThumbMouseDownEventBubbling: PropTypes.bool
     },
 
     getDefaultProps() {
@@ -359,7 +360,9 @@ export default createClass({
 
     handleDragStart(event) {
         this.dragging = true;
-        event.stopImmediatePropagation();
+        if (this.props.allowThumbMouseDownEventBubbling !== true) {
+            event.stopImmediatePropagation();
+        }
         this.setupDragging();
     },
 
